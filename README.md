@@ -1,7 +1,7 @@
 # Practical-Byzantine-Fault-Tolerance-In-Details
 Practical-Byzantine-Fault-Tolerance-In-Details
 
-Basic Concepts:
+<h>Basic Concepts:</h>
 
 • Verifier: block verifier participant.<br/>
 • Proposer: a block verification participant that is chosen to propose block in a consensus round.<br/>
