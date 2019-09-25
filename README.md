@@ -85,7 +85,7 @@ Conditions will trigger round change:
    * Round Change Timer Expires
    * Invalid PREPARE Message
    * Block Insertion Fails
-   * Catchup (not shown in picture above)
+   * Catchup (not shown in the picture above)
    
  How Round Change works:
    (TO BE CONTINUED)
