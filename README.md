@@ -21,10 +21,10 @@ Seele BFT inherits from the original PBFT by using 3-phase consensus, PRE-PREPAR
 <h2>Process</h2>
 Before each round, the verifiers will pick one of them as the proposer, by default, in a round robin fashion. <br/>
 
-1).The proposer will then propose a new block proposal and broadcast it along with the PRE-PREPARE message.<br/>
-2).Upon receiving the PRE-PREPARE message from the proposer, verifiers enter the state of PRE-PREPARED and then broadcast PREPARE message. This step is to make sure all verifiers are working on the same sequence and the same round.<br/>
-3).While receiving 2F + 1 of PREPARE messages, the verifier enters the state of PREPARED and then broadcasts COMMIT message. This step is to inform its peers that it accepts the proposed block and is going to insert the block to the chain.<br/>
-4).Lastly, verifiers wait for 2F + 1 of COMMIT messages to enter COMMITTED state and then insert the block to the chain.<br/>
+* The proposer will then propose a new block proposal and broadcast it along with the PRE-PREPARE message.<br/>
+* Upon receiving the PRE-PREPARE message from the proposer, verifiers enter the state of PRE-PREPARED and then broadcast PREPARE message. This step is to make sure all verifiers are working on the same sequence and the same round.<br/>
+* While receiving 2F + 1 of PREPARE messages, the verifier enters the state of PREPARED and then broadcasts COMMIT message. This step is to inform its peers that it accepts the proposed block and is going to insert the block to the chain.<br/>
+* Lastly, verifiers wait for 2F + 1 of COMMIT messages to enter COMMITTED state and then insert the block to the chain.<br/>
 
 <h2>Forks</h2>
 Blocks in Seele BFT protocol are final, which means that there are no forks and any valid block must be somewhere in the main chain. To prevent a faulty node from generating a totally different chain from the main chain, each verifier appends 2F + 1 received COMMIT signatures to extraData field in the header before inserting it into the chain. Thus blocks are self-verifiable and light client can be supported as well. </br>
@@ -51,9 +51,9 @@ Here are what a state and how it works in details:</br>
     * Proposer collects transitions from txpool.
     * Proposer generates a block proposal and broadcasts it to validators. It then enters the PRE-PREPARED state.
     * Each validator enters PRE-PREPARED upon receiving the PRE-PREPARE message with the following conditions:
-         **	Block proposal is from the valid proposer.
-         **	Block header is valid.
-         **	Block proposal's sequence and round match the validator's state.
+         *	Block proposal is from the valid proposer.
+         *	Block header is valid.
+         *	Block proposal's sequence and round match the validator's state.
 
 
 
