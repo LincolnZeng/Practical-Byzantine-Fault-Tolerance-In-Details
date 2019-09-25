@@ -80,6 +80,7 @@ Here are what a state and how it works in details:</br>
          
 
 <h2>Round Change<h2/>
+   
 Conditions will trigger round change:
    * Round Change Timer Expires
    * Invalid PREPARE Message
