@@ -32,13 +32,13 @@ Blocks in Seele BFT protocol are final, which means that there are no forks and 
 
 However, the dynamic extraData would cause an issue on block hash calculation. Since the same block from different verifiers can have different set of COMMIT signatures, the same block can have different block hashes as well. To solve this, we calculate the block hash by excluding the COMMIT signatures part. Therefore, we can still keep the block/block hash consistency as well as put the consensus proof in the block header.<br/>
 
-<h2>States Transition</h2>
+<h2>States Transition (One Round)</h2>
 
 Because of orders of blocks and multiply consensus processing steps of one block, Seele BFT implement a state to maintain right order of steps to prevent messing up which may bring up security issues.
 
 Here are what a state and how it works in details:</br>
 
-*	NEW ROUND: Proposer to send new block proposal. Verifiers wait for PRE-PREPARE message.</br>
+*	NEW ROUND: Proposer (selection rules will be discussed later) to send new block proposal. Verifiers wait for PRE-PREPARE message.</br>
 *	PRE-PREPARED: A verfier has received PRE-PREPARE message and broadcasts PREPARE message. Then it waits for 2F + 1 of PREPARE or COMMIT messages.</br>
 *	PREPARED: A verifier has received 2F + 1 of PREPARE messages and broadcasts COMMIT messages. Then it waits for 2F + 1 of COMMIT messages.</br>
 *	COMMITTED: A verifier has received 2F + 1 of COMMIT messages and is able to insert the proposed block into the blockchain.</br>
@@ -48,14 +48,43 @@ Here are what a state and how it works in details:</br>
 
 ![pbft](https://user-images.githubusercontent.com/29580346/65639686-78241180-df9d-11e9-8a56-022ef2962b0d.png)
 
-1. NEW ROUND --> PRE-PREPARED
+1. NEW ROUND --> PRE-PREPARED (PROPOSAL/PRE-PREPARE phase)
     * Proposer collects transitions from txpool.
-    * Proposer generates a block proposal and broadcasts it to validators. It then enters the PRE-PREPARED state.
-    * Each validator enters PRE-PREPARED upon receiving the PRE-PREPARE message with the following conditions:
+    * Proposer generates a block proposal and broadcasts it to verifiers. It then enters the PRE-PREPARED state.<br/>
+      Each verifier enters PRE-PREPARED upon receiving the PRE-PREPARE message with the following conditions:
          *	Block proposal is from the valid proposer.
          *	Block header is valid.
-         *	Block proposal's sequence and round match the validator's state.
+         *	Block proposal's sequence and round match the verifier's state.
+    
+2. PRE-PREPARED --> PREPARED: (PREPARE phase)
+   * Verifier broadcasts PREPARE message to other verifiers.
+   * Verifier received 2F + 1 of valid PREPARE messages to enter PREPARED state.<br/>
+     Valid messages conform to following condidtions:
+      * Messages are from valid Verifiers.
+      * Sequence and Round matched.
+      * BlockHash matched.
 
+3. PREPARED --> COMMITTED: (COMMIT phase)
+   * Verifier broadcasts COMMIT message to other verifiers.
+   * Verifier received 2F + 1 of valid COMMIT message to enter COMMITTED state.<br/>
+      * Messages are from valid Verifiers.
+      * Sequence and Round matched.
+      * BlockHash matched.
+ 
+ 4. COMMITTED --> SEAL COMMITTED: (SEAL phase)
+   * Verifier received 2F + + 1 commitments signatures to <strong>extraData</strong> and insert the block into blockchain.
+   * Verifier enter SEAL COMMITTED state when insertion succeeds.
+   
+ 5. SEAL COMMITTED --> NEW ROUND: (NEXT ROUND phase)
+   * Verifiers calculate/pick a new proposer and starts a new round
+         
 
-
-
+<h2>Round Change<h2/>
+Conditions will trigger round change:
+   * Round Change Timer Expires
+   * Invalid PREPARE Message
+   * Block Insertion Fails
+   * Catchup (not shown in picture above)
+   
+ How Round Change works:
+   (TO BE CONTINUED)
