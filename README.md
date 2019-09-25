@@ -81,11 +81,11 @@ Here are what a state and how it works in details:</br>
 
 <h2>Round Change<h2/>
    
-Conditions will trigger round change:
-      * Round Change Timer Expires
-      * Invalid PREPARE Message
-      * Block Insertion Fails
-      * Catchup (not shown in the picture above)
+* Conditions will trigger round change:
+   * Round Change Timer Expires
+   * Invalid PREPARE Message
+   * Block Insertion Fails
+   * Catchup (not shown in the picture above)
    
- How Round Change works:
+ * How Round Change works:
    (TO BE CONTINUED)
