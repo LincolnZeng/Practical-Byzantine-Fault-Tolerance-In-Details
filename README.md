@@ -3,14 +3,14 @@ Practical-Byzantine-Fault-Tolerance-In-Details
 
 <h1>Basic Concepts:</h1>
 
-• Verifier: block verifier participant.<br/>
-• Proposer: a block verification participant that is chosen to propose block in a consensus round.<br/>
-• Proposal: A new block creation proposal which is undergoing consensus processing.<br/>
-•Sequence: Sequence number of a proposal. A sequence number should be greater than all previous sequence numbers. Currently each proposed block height is its associated sequence number.<br/>
-• Round: consensus cycle. A round starts with a proposer create a block proposal and ends with a block commitment or round change.<br/>
-•	Round state: Consensus messages of a specific sequence and round, including pre-prepare message, prepare message, and commit message.<br/>
-•	Consensus proof: The commitment signatures of a block that can prove the block has gone through the consensus process.
-•	Snapshot: The validator voting state from last epoch.<br/>
+* Verifier: block verifier participant.<br/>
+* Proposer: a block verification participant that is chosen to propose block in a consensus round.<br/>
+* Proposal: A new block creation proposal which is undergoing consensus processing.<br/>
+* Sequence: Sequence number of a proposal. A sequence number should be greater than all previous sequence numbers. Currently each proposed block height is its associated sequence number.<br/>
+* Round: consensus cycle. A round starts with a proposer create a block proposal and ends with a block commitment or round change.<br/>
+*	Round state: Consensus messages of a specific sequence and round, including pre-prepare message, prepare message, and commit message.<br/>
+*	Consensus proof: The commitment signatures of a block that can prove the block has gone through the consensus process.
+*	Snapshot: The validator voting state from last epoch.<br/>
 
 
 <h1>Core (consensus)</h1>
@@ -37,12 +37,12 @@ Because of orders of blocks and multiply consensus processing steps of one block
 
 Here are what a state and how it works in details:</br>
 
-•	NEW ROUND: Proposer to send new block proposal. Verifiers wait for PRE-PREPARE message.</br>
-•	PRE-PREPARED: A verfier has received PRE-PREPARE message and broadcasts PREPARE message. Then it waits for 2F + 1 of PREPARE or COMMIT messages.</br>
-•	PREPARED: A verifier has received 2F + 1 of PREPARE messages and broadcasts COMMIT messages. Then it waits for 2F + 1 of COMMIT messages.</br>
-•	COMMITTED: A verifier has received 2F + 1 of COMMIT messages and is able to insert the proposed block into the blockchain.</br>
-•	SEAL COMMITTED: A new block is successfully inserted into the blockchain and the verifier is ready for the next round.</br>
-•	ROUND CHANGE: A verifier is waiting for 2F + 1 of ROUND CHANGE messages on the same proposed round number.</br>
+*	NEW ROUND: Proposer to send new block proposal. Verifiers wait for PRE-PREPARE message.</br>
+*	PRE-PREPARED: A verfier has received PRE-PREPARE message and broadcasts PREPARE message. Then it waits for 2F + 1 of PREPARE or COMMIT messages.</br>
+*	PREPARED: A verifier has received 2F + 1 of PREPARE messages and broadcasts COMMIT messages. Then it waits for 2F + 1 of COMMIT messages.</br>
+*	COMMITTED: A verifier has received 2F + 1 of COMMIT messages and is able to insert the proposed block into the blockchain.</br>
+*	SEAL COMMITTED: A new block is successfully inserted into the blockchain and the verifier is ready for the next round.</br>
+*	ROUND CHANGE: A verifier is waiting for 2F + 1 of ROUND CHANGE messages on the same proposed round number.</br>
 
 
 ![pbft](https://user-images.githubusercontent.com/29580346/65639686-78241180-df9d-11e9-8a56-022ef2962b0d.png)
@@ -51,6 +51,10 @@ Here are what a state and how it works in details:</br>
     * Proposer collects transitions from txpool.
     * Proposer generates a block proposal and broadcasts it to validators. It then enters the PRE-PREPARED state.
     * Each validator enters PRE-PREPARED upon receiving the PRE-PREPARE message with the following conditions:
+         **	Block proposal is from the valid proposer.
+         **	Block header is valid.
+         **	Block proposal's sequence and round match the validator's state.
+
 
 
 
