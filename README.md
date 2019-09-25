@@ -78,13 +78,20 @@ Here are what a state and how it works in details:</br>
       * Verifiers calculate/pick a new proposer and start a new round
          
 
-<h2>Round Change</h2>
+<h2>Round Change(Round Management)</h2>
    
 Conditions will trigger round change:
    * Round Change Timer Expires
    * Invalid PREPARE Message
    * Block Insertion Fails
-   * Catchup (not shown in the picture above)
+   * Catchup (not shown in the picture above): jumps out of round change loop is when it receives verified block(s) through peer synchronization.
    
 How Round Change works:</br>
+  1. When a verifier notices that one of the above conditions applies, it broadcasts a ROUND CHANGE message along with the proposed round number and waits for ROUND CHANGE messages from other validators. The proposed round number is selected based on following condition:
+      * If the verifier has received ROUND CHANGE messages from its peers, it picks the largest round number which has F + 1 of ROUND CHANGE messages.
+      * Otherwise, it picks 1 + current round number as the proposed round number.
+   
+ 2. Whenever a verifier receives F + 1 of ROUND CHANGE messages on the same proposed round number, it compares the received one with its own. If the received is larger, the validator broadcasts ROUND CHANGE message again with the received number.
+ 3. Upon receiving 2F + 1 of ROUND CHANGE messages on the same proposed round number, the validator exits the round change loop, calculates the new proposer, and then enters NEW ROUND state.
+
    (TO BE CONTINUED)
