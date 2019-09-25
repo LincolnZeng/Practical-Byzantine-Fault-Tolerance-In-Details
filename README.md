@@ -32,6 +32,9 @@ Blocks in Seele BFT protocol are final, which means that there are no forks and 
 
 However, the dynamic extraData would cause an issue on block hash calculation. Since the same block from different verifiers can have different set of COMMIT signatures, the same block can have different block hashes as well. To solve this, we calculate the block hash by excluding the COMMIT signatures part. Therefore, we can still keep the block/block hash consistency as well as put the consensus proof in the block header.<br/>
 
+<h2>Proposer Selection</h2>
+
+
 <h2>States Transition (One Round)</h2>
 
 Because of orders of blocks and multiply consensus processing steps of one block, Seele BFT implement a state to maintain right order of steps to prevent messing up which may bring up security issues.
@@ -84,14 +87,14 @@ Conditions will trigger round change:
    * Round Change Timer Expires
    * Invalid PREPARE Message
    * Block Insertion Fails
-   * Catchup (not shown in the picture above): jumps out of round change loop is when it receives verified block(s) through peer synchronization.
+   * Catchup (not shown in the picture above): jumps out of round change loop when it receives verified block(s) through peer synchronization.
    
 How Round Change works:</br>
   1. When a verifier notices that one of the above conditions applies, it broadcasts a ROUND CHANGE message along with the proposed round number and waits for ROUND CHANGE messages from other validators. The proposed round number is selected based on following condition:
       * If the verifier has received ROUND CHANGE messages from its peers, it picks the largest round number which has F + 1 of ROUND CHANGE messages.
       * Otherwise, it picks 1 + current round number as the proposed round number.
    
- 2. Whenever a verifier receives F + 1 of ROUND CHANGE messages on the same proposed round number, it compares the received one with its own. If the received is larger, the validator broadcasts ROUND CHANGE message again with the received number.
- 3. Upon receiving 2F + 1 of ROUND CHANGE messages on the same proposed round number, the validator exits the round change loop, calculates the new proposer, and then enters NEW ROUND state.
+ 2. Whenever a verifier receives F + 1 of ROUND CHANGE messages on the same proposed round number, it compares the received one with its own. If the received is larger, the verifier broadcasts ROUND CHANGE message again with the received number.
+ 3. Upon receiving 2F + 1 of ROUND CHANGE messages on the same proposed round number, the verifier exits the round change loop, calculates the new proposer, and then enters NEW ROUND state.
 
    (TO BE CONTINUED)
