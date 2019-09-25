@@ -44,7 +44,6 @@ Here are what a state and how it works in details:</br>
 •	SEAL COMMITTED: A new block is successfully inserted into the blockchain and the verifier is ready for the next round.</br>
 •	ROUND CHANGE: A verifier is waiting for 2F + 1 of ROUND CHANGE messages on the same proposed round number.</br>
 
-![pbft-flow.pdf](https://github.com/LincolnZeng/Practical-Byzantine-Fault-Tolerance-In-Details/files/3654510/pbft-flow.pdf)
 
 ![pbft](https://user-images.githubusercontent.com/29580346/65635071-7bff6600-df94-11e9-90c6-02012099f6f1.png)
 
