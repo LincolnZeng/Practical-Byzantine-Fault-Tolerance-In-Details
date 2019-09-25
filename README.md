@@ -43,3 +43,5 @@ Here are what a state and how it works in details:</br>
 •	COMMITTED: A verifier has received 2F + 1 of COMMIT messages and is able to insert the proposed block into the blockchain.</br>
 •	SEAL COMMITTED: A new block is successfully inserted into the blockchain and the verifier is ready for the next round.</br>
 •	ROUND CHANGE: A verifier is waiting for 2F + 1 of ROUND CHANGE messages on the same proposed round number.</br>
+
+![pbft](https://user-images.githubusercontent.com/29580346/65634590-676e9e00-df93-11e9-989f-f5decdd0b801.png)
