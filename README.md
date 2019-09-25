@@ -76,7 +76,7 @@ Here are what a state and how it works in details:</br>
    * Verifier enter SEAL COMMITTED state when insertion succeeds.
    
  5. SEAL COMMITTED --> NEW ROUND: (NEXT ROUND phase)
-   * Verifiers calculate/pick a new proposer and starts a new round
+   * Verifiers calculate/pick a new proposer and start a new round
          
 
 <h2>Round Change<h2/>
