@@ -45,5 +45,5 @@ Here are what a state and how it works in details:</br>
 •	ROUND CHANGE: A verifier is waiting for 2F + 1 of ROUND CHANGE messages on the same proposed round number.</br>
 
 
-![pbft](https://user-images.githubusercontent.com/29580346/65635071-7bff6600-df94-11e9-90c6-02012099f6f1.png)
+![pbft](https://user-images.githubusercontent.com/29580346/65639686-78241180-df9d-11e9-8a56-022ef2962b0d.png)
 
