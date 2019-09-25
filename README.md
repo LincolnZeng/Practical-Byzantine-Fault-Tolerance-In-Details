@@ -79,13 +79,13 @@ Here are what a state and how it works in details:</br>
       * Verifiers calculate/pick a new proposer and start a new round
          
 
-<h2>Round Change<h2/>
+<h2>Round Change</h2>
    
-* Conditions will trigger round change:
-   * Round Change Timer Expires
-   * Invalid PREPARE Message
-   * Block Insertion Fails
-   * Catchup (not shown in the picture above)
+ Conditions will trigger round change:
+      * Round Change Timer Expires
+      * Invalid PREPARE Message
+      * Block Insertion Fails
+      * Catchup (not shown in the picture above)
    
- * How Round Change works:
+ How Round Change works:
    (TO BE CONTINUED)
