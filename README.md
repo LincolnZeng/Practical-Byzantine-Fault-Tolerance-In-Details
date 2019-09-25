@@ -31,3 +31,15 @@ Blocks in Seele BFT protocol are final, which means that there are no forks and 
 
 However, the dynamic extraData would cause an issue on block hash calculation. Since the same block from different verifiers can have different set of COMMIT signatures, the same block can have different block hashes as well. To solve this, we calculate the block hash by excluding the COMMIT signatures part. Therefore, we can still keep the block/block hash consistency as well as put the consensus proof in the block header.<br/>
 
+<h2>States Transition</h2>
+
+Because of orders of blocks and multiply consensus processing steps of one block, Seele BFT implement a state to maintain right order of steps to prevent messing up which may bring up security issues.
+
+Here are what a state and how it works in details:</br>
+
+•	NEW ROUND: Proposer to send new block proposal. Verifiers wait for PRE-PREPARE message.</br>
+•	PRE-PREPARED: A verfier has received PRE-PREPARE message and broadcasts PREPARE message. Then it waits for 2F + 1 of PREPARE or COMMIT messages.</br>
+•	PREPARED: A verifier has received 2F + 1 of PREPARE messages and broadcasts COMMIT messages. Then it waits for 2F + 1 of COMMIT messages.</br>
+•	COMMITTED: A verifier has received 2F + 1 of COMMIT messages and is able to insert the proposed block into the blockchain.</br>
+•	SEAL COMMITTED: A new block is successfully inserted into the blockchain and the verifier is ready for the next round.</br>
+•	ROUND CHANGE: A verifier is waiting for 2F + 1 of ROUND CHANGE messages on the same proposed round number.</br>
