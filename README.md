@@ -1,7 +1,7 @@
 # Practical-Byzantine-Fault-Tolerance-In-Details
 Practical-Byzantine-Fault-Tolerance-In-Details
 
-<h>Basic Concepts:</h>
+<h1>Basic Concepts:</h1>
 
 • Verifier: block verifier participant.<br/>
 • Proposer: a block verification participant that is chosen to propose block in a consensus round.<br/>
@@ -13,7 +13,7 @@ Practical-Byzantine-Fault-Tolerance-In-Details
 •	Snapshot: The validator voting state from last epoch.<br/>
 
 
-Core (consensus)
+<h1>Core (consensus)</h1>
 
 • Seele BFT inherits from the original PBFT by using 3-phase consensus, PRE-PREPARE, PREPARE, and COMMIT. The system can tolerate at most of F faulty nodes in a N verifier nodes network, where N = 3F + 1. We only need at least 2F + 1 honest commits because (2F + 1)/ (3F + 1) > 2F / 3F = 2/3. <br/>
 
