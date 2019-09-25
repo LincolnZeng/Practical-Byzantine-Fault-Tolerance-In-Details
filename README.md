@@ -47,3 +47,10 @@ Here are what a state and how it works in details:</br>
 
 ![pbft](https://user-images.githubusercontent.com/29580346/65639686-78241180-df9d-11e9-8a56-022ef2962b0d.png)
 
+1. NEW ROUND --> PRE-PREPARED
+    * Proposer collects transitions from txpool.
+    * Proposer generates a block proposal and broadcasts it to validators. It then enters the PRE-PREPARED state.
+    * Each validator enters PRE-PREPARED upon receiving the PRE-PREPARE message with the following conditions:
+
+
+
