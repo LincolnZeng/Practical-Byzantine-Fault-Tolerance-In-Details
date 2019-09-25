@@ -45,8 +45,7 @@ Here are what a state and how it works in details:</br>
 *	SEAL COMMITTED: A new block is successfully inserted into the blockchain and the verifier is ready for the next round.</br>
 *	ROUND CHANGE: A verifier is waiting for 2F + 1 of ROUND CHANGE messages on the same proposed round number.</br>
 
-
-![pbft](https://user-images.githubusercontent.com/29580346/65639686-78241180-df9d-11e9-8a56-022ef2962b0d.png)
+![pbft](https://user-images.githubusercontent.com/29580346/65644928-7f055100-dfaa-11e9-9546-856b8e6df8fe.png)
 
 1. NEW ROUND --> PRE-PREPARED (PROPOSAL/PRE-PREPARE phase)
     * Proposer collects transitions from txpool.
