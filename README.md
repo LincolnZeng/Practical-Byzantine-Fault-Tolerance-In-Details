@@ -72,11 +72,11 @@ Here are what a state and how it works in details:</br>
       * BlockHash matched.
  
  4. COMMITTED --> SEAL COMMITTED: (SEAL phase)
-   * Verifier received 2F + + 1 commitments signatures to <strong>extraData</strong> and insert the block into blockchain.
-   * Verifier enter SEAL COMMITTED state when insertion succeeds.
+      * Verifier received 2F + + 1 commitments signatures to <strong>extraData</strong> and insert the block into blockchain.
+      * Verifier enter SEAL COMMITTED state when insertion succeeds.
    
  5. SEAL COMMITTED --> NEW ROUND: (NEXT ROUND phase)
-   * Verifiers calculate/pick a new proposer and start a new round
+      * Verifiers calculate/pick a new proposer and start a new round
          
 
 <h2>Round Change<h2/>
