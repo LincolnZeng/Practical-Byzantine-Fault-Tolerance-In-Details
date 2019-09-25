@@ -87,5 +87,5 @@ Conditions will trigger round change:
    * Block Insertion Fails
    * Catchup (not shown in the picture above)
    
-How Round Change works:
+How Round Change works:</br>
    (TO BE CONTINUED)
