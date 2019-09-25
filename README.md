@@ -15,13 +15,16 @@ Practical-Byzantine-Fault-Tolerance-In-Details
 
 <h1>Core (consensus)</h1>
 
+<h2>Fault Tolerance</h2>
 Seele BFT inherits from the original PBFT by using 3-phase consensus, PRE-PREPARE, PREPARE, and COMMIT. The system can tolerate at most of F faulty nodes in a N verifier nodes network, where N = 3F + 1. We only need at least 2F + 1 honest commits because (2F + 1)/ (3F + 1) > 2F / 3F = 2/3. <br/>
 
+<h2>Process</h2>
 Before each round, the verifiers will pick one of them as the proposer, by default, in a round robin fashion. <br/>
-                        1).The proposer will then propose a new block proposal and broadcast it along with the PRE-PREPARE message.<br/>
-                        2).Upon receiving the PRE-PREPARE message from the proposer, verifiers enter the state of PRE-PREPARED and then broadcast PREPARE message. This step is to make sure all verifiers are working on the same sequence and the same round.<br/>
-                        3).While receiving 2F + 1 of PREPARE messages, the verifier enters the state of PREPARED and then broadcasts COMMIT message. This step is to inform its peers that it accepts the proposed block and is going to insert the block to the chain.<br/>
-                        4).Lastly, verifiers wait for 2F + 1 of COMMIT messages to enter COMMITTED state and then insert the block to the chain.<br/>
+1).The proposer will then propose a new block proposal and broadcast it along with the PRE-PREPARE message.<br/>
+2).Upon receiving the PRE-PREPARE message from the proposer, verifiers enter the state of PRE-PREPARED and then broadcast PREPARE message. This step is to make sure all verifiers are working on the same sequence and the same round.<br/>
+3).While receiving 2F + 1 of PREPARE messages, the verifier enters the state of PREPARED and then broadcasts COMMIT message. This step is to inform its peers that it accepts the proposed block and is going to insert the block to the chain.<br/>
+4).Lastly, verifiers wait for 2F + 1 of COMMIT messages to enter COMMITTED state and then insert the block to the chain.<br/>
 
- • Blocks in Istanbul BFT protocol are final, which means that there are no forks and any valid block must be somewhere in the main chain. To prevent a faulty node from generating a totally different chain from the main chain, each verifier appends 2F + 1 received COMMIT signatures to extraData field in the header before inserting it into the chain. Thus blocks are self-verifiable and light client can be supported as well. However, the dynamic extraData would cause an issue on block hash calculation. Since the same block from different verifiers can have different set of COMMIT signatures, the same block can have different block hashes as well. To solve this, we calculate the block hash by excluding the COMMIT signatures part. Therefore, we can still keep the block/block hash consistency as well as put the consensus proof in the block header.<br/>
+<h2>Forks</h2>
+Blocks in seele BFT protocol are final, which means that there are no forks and any valid block must be somewhere in the main chain. To prevent a faulty node from generating a totally different chain from the main chain, each verifier appends 2F + 1 received COMMIT signatures to extraData field in the header before inserting it into the chain. Thus blocks are self-verifiable and light client can be supported as well. However, the dynamic extraData would cause an issue on block hash calculation. Since the same block from different verifiers can have different set of COMMIT signatures, the same block can have different block hashes as well. To solve this, we calculate the block hash by excluding the COMMIT signatures part. Therefore, we can still keep the block/block hash consistency as well as put the consensus proof in the block header.<br/>
 
