@@ -101,4 +101,9 @@ How Round Change works:</br>
  2. Whenever a verifier receives F + 1 of ROUND CHANGE messages on the same proposed round number, it compares the received one with its own. If the received is larger, the verifier broadcasts ROUND CHANGE message again with the received number.
  3. Upon receiving 2F + 1 of ROUND CHANGE messages on the same proposed round number, the verifier exits the round change loop, calculates the new proposer, and then enters NEW ROUND state.
 
+<h2>Voting</h2>
+* Verifier can cast one vote to propose a change to the verifier list. (verifier list voting)
+* Verifiers vote on one block with "for" or "against", once a proposal meets the majority votes will come into effect immediately.
+* A effective proposal will entails discarding all pending votes, and reset state to start a new round.
+* Concurrent proposals are allowed and votes are tallied live as chain proceedes.
    (TO BE CONTINUED)
