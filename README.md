@@ -34,6 +34,9 @@ However, the dynamic extraData would cause an issue on block hash calculation. S
 
 <h2>Proposer Selection</h2>
 
+since each request should have no difference and each verifier will have equal oppotulity to propose. We use two pololies for round change: Round Robin and Sticky property.
+   ![RoundRobin](https://user-images.githubusercontent.com/29580346/65647894-05269500-dfb5-11e9-9908-d48da91edaa2.png)
+   * Round Robin: Proposer will change
 
 <h2>States Transition (One Round)</h2>
 
@@ -82,7 +85,7 @@ Here are what a state and how it works in details:</br>
          
 
 <h2>Round Change(Round Management)</h2>
-   
+
 Conditions will trigger round change:
    * Round Change Timer Expires
    * Invalid PREPARE Message
