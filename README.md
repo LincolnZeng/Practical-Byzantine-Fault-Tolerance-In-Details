@@ -85,7 +85,7 @@ Here are what a state and how it works in details:</br>
       * Verifiers calculate/pick a new proposer and start a new round
          
 
-<h2>Round Change(Round Management)</h2>
+<h2>Round Change (Round Management)</h2>
 
 Conditions will trigger round change:
    * Round Change Timer Expires
