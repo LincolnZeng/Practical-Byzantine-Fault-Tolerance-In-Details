@@ -3,14 +3,14 @@ Practical-Byzantine-Fault-Tolerance-In-Details
 
 <h1>Basic Concepts:</h1>
 
-* Verifier: block verifier participant.<br/>
-* Proposer: a block verification participant that is chosen to propose block in a consensus round.<br/>
+* Verifier: A participant to verify a block .<br/>
+* Proposer: A verifier that is chosen to propose block in a consensus round.<br/>
 * Proposal: A new block creation proposal which is undergoing consensus processing.<br/>
 * Sequence: Sequence number of a proposal. A sequence number should be greater than all previous sequence numbers. Currently each proposed block height is its associated sequence number.<br/>
-* Round: consensus cycle. A round starts with a proposer create a block proposal and ends with a block commitment or round change.<br/>
+* Round: consensus cycle. A round starts with a proposer creating a block proposal and ends with a block commitment or round change.<br/>
 *	Round state: Consensus messages of a specific sequence and round, including pre-prepare message, prepare message, and commit message.<br/>
 *	Consensus proof: The commitment signatures of a block that can prove the block has gone through the consensus process.
-*	Snapshot: The validator voting state from last epoch.<br/>
+*	Snapshot: The verifier voting state from last epoch.<br/>
 
 
 <h1>Core (consensus)</h1>
@@ -34,15 +34,15 @@ However, the dynamic extraData would cause an issue on block hash calculation. S
 
 <h2>Proposer Selection</h2>
 
-since each proposal is similar and each verifier will have equal oppotulity to propose. We use two pololies for Proposer Selection: Round Robin and Sticky property.
+Since each proposal is similar and each verifier will have equal oppotunity to propose. We use two pololies for Proposer Selection: Round Robin and Sticky property.
    
    ![RoundRobin](https://user-images.githubusercontent.com/29580346/65648417-0bb60c00-dfb7-11e9-8bf8-5d9f75243db0.png)
-   * Round Robin: Proposer will change for a new block or Round Change request.
+   * Round Robin: Proposer will be changed for a new block or Round Change request.
    * Sticky: Only when a round change the proposer will change. (Proposer will keep same for one round).
 
 <h2>States Transition (One Round)</h2>
 
-Because of orders of blocks and multiply consensus processing steps of one block, Seele BFT implement a state to maintain right order of steps to prevent messing up which may bring up security issues.
+Because of orders of blocks and multiply consensus processing steps of one block, Seele BFT implements a state to maintain right order of steps to prevent messing up which may bring up security issues.
 
 Here are what a state and how it works in details:</br>
 
