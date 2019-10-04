@@ -34,7 +34,7 @@ However, the dynamic extraData would cause an issue on block hash calculation. S
 
 <h2>Proposer Selection</h2>
 
-Since each proposal is similar and each verifier will have equal oppotunity to propose. We use two pololies for Proposer Selection: Round Robin and Sticky property.
+Since each proposal is similar and each verifier will have equal oppotunity to propose. We use two policies for Proposer Selection: Round Robin and Sticky property.
    
    ![RoundRobin](https://user-images.githubusercontent.com/29580346/65648417-0bb60c00-dfb7-11e9-8bf8-5d9f75243db0.png)
    * Round Robin: Proposer will be changed for a new block or Round Change request.
